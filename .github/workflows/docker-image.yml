@@ -14,8 +14,8 @@ jobs:
   push_to_registry:
     strategy:
       matrix:
-        go-version: [1.18.x, 1.19.x]
-        os: [ubuntu-latest, macos-latest]
+        go-version: [1.18.x]
+        os: [ubuntu-latest]
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
