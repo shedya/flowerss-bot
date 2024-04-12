@@ -1,3 +1,4 @@
+[![Publish Docker image](https://github.com/shedya/flowerss-bot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/shedya/flowerss-bot/actions/workflows/docker-image.yml)
 # 部署
 
 
