@@ -65,7 +65,7 @@ const (
 	defaultMessageTpl     = `
  <b>{{.ContentTitle}}</b>
  
-{{ if .PreviewText }}{{.PreviewText}}{{- end}}
+{{ if .PreviewText }}{{.PreviewText}}...{{- end}}
 
 {{if .EnableTelegraph}}
 {{.ContentTitle}} <a href="{{.RawLink}}">查看原文</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
@@ -77,7 +77,7 @@ const (
 	defaultMessageMarkdownTpl = `
 ** {{.ContentTitle}} **
  
-{{ if .PreviewText }}{{.PreviewText}}{{- end}}
+{{ if .PreviewText }}{{.PreviewText}}...{{- end}}
 
 {{if .EnableTelegraph}}
 {{.ContentTitle}} [查看原文]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
