@@ -23,6 +23,7 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: shedya/flowerss-bot
           file: ./coverage.txt
           flags: unittests
           name: codecov-umbrella-${{ matrix.os }}-${{ matrix.go-version }}
