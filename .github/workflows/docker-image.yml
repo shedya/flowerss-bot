@@ -31,18 +31,31 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      - name: Set up Docker Buildx
+      # 使用buildx来构建镜像，这个工具功能很丰富
+        uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          images: shed219/flowerss-bot
+          buildx-version: latest
+      - name: Build dockerfile (with push)
+      # 构建镜像，用buildx可以同时构建X86和ARM架构的镜像，然后推送到hub.docker.com
+        run: |
+          fullCommit="${{ github.event.commits[0].id }}" && \
+          docker buildx build \
+          --platform=linux/amd64,linux/arm/v7,linux/arm64 \
+          --output "type=image,push=true" \
+          --file ./Dockerfile . \
+          --tag shed219/flowerss-bot:"${fullCommit: 0: 7}"
+      # - name: Extract metadata (tags, labels) for Docker
+      #   id: meta
+      #   uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      #   with:
+      #     images: shed219/flowerss-bot
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+      # - name: Build and push Docker image
+      #   uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+      #   with:
+      #     context: .
+      #     file: ./Dockerfile
+      #     push: true
+      #     tags: ${{ steps.meta.outputs.tags }}
+      #     labels: ${{ steps.meta.outputs.labels }}
