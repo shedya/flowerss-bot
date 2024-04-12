@@ -62,25 +62,33 @@ var (
 
 const (
 	defaultMessageTplMode = tb.ModeHTML
-	defaultMessageTpl     = `<b>{{.SourceTitle}}</b>{{ if .PreviewText }}
----------- Preview ----------
+	defaultMessageTpl     = `
+ <b>{{.ContentTitle}}</b>
+ 
+ {{ if .PreviewText }}
+ 
 {{.PreviewText}}
------------------------------
+
 {{- end}}{{if .EnableTelegraph}}
-{{.ContentTitle}} <a href="{{.TelegraphURL}}">Telegraph</a> | <a href="{{.RawLink}}">原文</a>
+{{.ContentTitle}} <a href="{{.RawLink}}">查看原文</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
 {{- else }}
-<a href="{{.RawLink}}">{{.ContentTitle}}</a>
+<a href="{{.RawLink}}">查看原文</a>
 {{- end }}
 {{.Tags}}
 `
-	defaultMessageMarkdownTpl = `** {{.SourceTitle}} **{{ if .PreviewText }}
----------- Preview ----------
+	defaultMessageMarkdownTpl = `
+** {{.ContentTitle}} **
+ 
+{{ if .PreviewText }}
+ 
 {{.PreviewText}}
------------------------------
-{{- end}}{{if .EnableTelegraph}}
-{{.ContentTitle}} [Telegraph]({{.TelegraphURL}}) | [原文]({{.RawLink}})
+
+{{- end}}
+
+{{if .EnableTelegraph}}
+{{.ContentTitle}} [查看原文]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
 {{- else }}
-[{{.ContentTitle}}]({{.RawLink}})
+[查看原文]({{.RawLink}})
 {{- end }}
 {{.Tags}}
 `
