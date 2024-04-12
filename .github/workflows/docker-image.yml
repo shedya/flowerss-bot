@@ -12,9 +12,17 @@ on: [push, pull_request]
 
 jobs:
   push_to_registry:
+    strategy:
+      matrix:
+        go-version: [1.18.x, 1.19.x]
+        os: [ubuntu-latest, macos-latest]
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
       - name: Check out the repo
         uses: actions/checkout@v4
 
