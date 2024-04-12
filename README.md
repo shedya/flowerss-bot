@@ -1,4 +1,4 @@
-[![Publish Docker image](https://github.com/shedya/flowerss-bot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/shedya/flowerss-bot/actions/workflows/docker-image.yml)
+[![Publish Docker image](https://github.com/shedya/flowerss-bot/actions/workflows/docker-image.yml/badge.svg)](https://github.com/shedya/flowerss-bot/actions/workflows/docker-image.yml) [![codecov](https://codecov.io/gh/shedya/flowerss-bot/graph/badge.svg?token=61JD2B6EZZ)](https://codecov.io/gh/shedya/flowerss-bot)
 # 部署
 
 
