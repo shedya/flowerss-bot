@@ -8,7 +8,13 @@
 # 还可以引用标记或分支，但该操作可能会更改而不发出警告。
 
 name: Publish Docker image
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   push_to_registry:
@@ -17,12 +23,13 @@ jobs:
         go-version: [1.20.x, 1.18.x]
         os: [ubuntu-latest]
     name: Push Docker image to Docker Hub
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Install Go
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -31,21 +38,33 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
       - name: Set up Docker Buildx
-      # 使用buildx来构建镜像，这个工具功能很丰富
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           buildx-version: latest
-      - name: Build dockerfile (with push)
-      # 构建镜像，用buildx可以同时构建X86和ARM架构的镜像，然后推送到hub.docker.com
+
+      - name: Build dockerfile
         run: |
-          fullCommit="${{ github.event.commits[0].id }}" && \
+          fullCommit="${{ github.event.commits[0].id }}"
           docker buildx build \
-          --platform=linux/amd64,linux/arm/v7,linux/arm64 \
-          --output "type=image,push=true" \
-          --file ./Dockerfile . \
-          --tag shed219/flowerss-bot:"${fullCommit: 0: 7}"
-          --tag shed219/flowerss-bot:latest
+            --platform=linux/amd64,linux/arm64 \
+            --cache-from=type=local,src=/path/to/buildx/cache \
+            --file ./Dockerfile \
+            --target <build-stage> \
+            --tag shed219/flowerss-bot:"${fullCommit:0:7}"
+
+      - name: Push Docker image
+        run: |
+          fullCommit="${{ github.event.commits[0].id }}"
+          docker buildx build \
+            --platform=linux/amd64,linux/arm64 \
+            --output "type=image,push=true" \
+            --file ./Dockerfile \
+            --tag shed219/flowerss-bot:"${fullCommit:0:7}"
+          docker push shed219/flowerss-bot:"${fullCommit:0:7}"
+          docker tag shed219/flowerss-bot:"${fullCommit:0:7}" shed219/flowerss-bot:latest
+          docker push shed219/flowerss-bot:latest
       # - name: Extract metadata (tags, labels) for Docker
       #   id: meta
       #   uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
