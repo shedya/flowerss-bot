@@ -2,7 +2,7 @@ FROM golang:1.20.14-alpine as builder
 #ENV CGO_ENABLED=0
 COPY . /flowerss
 # 安装必要的构建工具和库
-RUN apk add --no-cache git make gcc libc-dev&& \
+RUN apk add git make gcc libc-dev && \
     cd /flowerss && make build
 
 # Image starts here
