@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 FROM golang:1.20.12-alpine as builder
+=======
+FROM golang:1.20.10-alpine as builder
+>>>>>>> parent of ba607ec (back 1.18)
 #ENV CGO_ENABLED=0
 COPY . /flowerss
 # 安装必要的构建工具和库
