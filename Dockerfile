@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 FROM golang:1.20.12-alpine as builder
+=======
+FROM golang:1.20.10-alpine as builder
+>>>>>>> parent of ba607ec (back 1.18)
 =======
 FROM golang:1.20.10-alpine as builder
 >>>>>>> parent of ba607ec (back 1.18)
