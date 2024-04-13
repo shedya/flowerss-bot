@@ -16,7 +16,7 @@ jobs:
       matrix:
         go-version: [1.20.x, 1.18.x]
         os: [ubuntu-latest]
-    name: Push Docker image to Docker Hub
+    name: Push to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Install Go
