@@ -1,8 +1,6 @@
-FROM golang:1.22.2-alpine as builder
+FROM golang:1.20.4-alpine as builder
 #ENV CGO_ENABLED=0
 COPY . /flowerss
-# 添加gcompat包以提供glibc兼容性
-RUN apk add --no-cache gcompat
 # 安装必要的构建工具和库
 RUN apk add --no-cache git make gcc libc-dev&& \
     cd /flowerss && make build
