@@ -66,7 +66,7 @@ const (
  <b>{{.ContentTitle}}</b>
 {{ if .PreviewText }}{{.PreviewText}}...{{- end}}
 {{if .EnableTelegraph}}
-{{.ContentTitle}} <a href="{{.RawLink}}">查看原文</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
+<a href="{{.RawLink}}">查看原文</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
 {{- else }}
 <a href="{{.RawLink}}">查看原文</a>
 {{- end }}
@@ -76,7 +76,7 @@ const (
 ** {{.ContentTitle}} **
 {{ if .PreviewText }}{{.PreviewText}}...{{- end}}
 {{if .EnableTelegraph}}
-{{.ContentTitle}} [查看原文]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
+[查看原文]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
 {{- else }}
 [查看原文]({{.RawLink}})
 {{- end }}
