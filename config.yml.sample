@@ -1,29 +1,25 @@
-bot_token:
-telegraph_token:
-telegraph_account:
-telegraph_author_name:
-telegraph_author_url:
-socks5:
-update_interval: 10
+bot_token: XXX
+#多个telegraph_token可采用数组格式：
+# telegraph_token:
+#  - token_1
+#  - token_2
+telegraph_token: xxxx
 user_agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
-
-mysql:
-  host:
-  port:
-  user:
-  password:
-  database:
-
+preview_text: 0
+disable_web_page_preview: false
+socks5: 127.0.0.1:1080
+update_interval: 10
+error_threshold: 100
 telegram:
-  endpoint:
-
-log:
-  level: release
-  db_log: false # 打印数据库日志，false则只会打印数据库错误日志
-
-#  file: ./flowerss.log
-
+  endpoint: https://xxx.com/
+mysql:
+  host: 127.0.0.1
+  port: 3306
+  user: user
+  password: pwd
+  database: flowerss
 sqlite:
   path: ./data.db
-
 allowed_users:
+  - 123
+  - 234
