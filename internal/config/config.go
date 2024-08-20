@@ -71,9 +71,8 @@ const (
 {{- else }}
 <a href="{{.RawLink}}">查看原文</a>
 {{- end }}
-{{- else }}{{if .EnableTelegraph}}<a href="{{.RawLink}}">{{.ContentTitle}}</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
-{{- else }}<a href="{{.RawLink}}">{{.ContentTitle}}</a>
-{{- end}}
+{{- else }}{{if .EnableTelegraph}}<a href="{{.RawLink}}"><b>{{.ContentTitle}}</b></a> | <a href="{{.TelegraphURL}}">Telegraph</a>
+{{- else }}<a href="{{.RawLink}}"><b>{{.ContentTitle}}</b></a>{{- end }}{{- end }}
 {{.Tags}}
 `
 	defaultMessageMarkdownTpl = `
@@ -81,13 +80,12 @@ const (
 
 {{.PreviewText}}...
 {{if .EnableTelegraph}}
-[查看原文]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
+[查看原文]({{.RawLink}}) |  [Telegraph]({{.TelegraphURL}})
 {{- else }}
 [查看原文]({{.RawLink}})
 {{- end }}
-{{- else }}{{if .EnableTelegraph}}[** {{.ContentTitle}} **]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
-{{- else }}[** {{.ContentTitle}} **]({{.RawLink}})
-{{- end}}
+{{- else }}{{if .EnableTelegraph}}[** {{.ContentTitle}} **]({{.RawLink}}) |  [Telegraph]({{.TelegraphURL}})
+{{- else }}[** {{.ContentTitle}} **]({{.RawLink}}){{- end}}{{- end }}
 {{.Tags}}
 `
 	TestMode    RunType = "Test"
