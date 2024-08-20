@@ -63,23 +63,31 @@ var (
 const (
 	defaultMessageTplMode = tb.ModeHTML
 	defaultMessageTpl     = `
- <b>{{.ContentTitle}}</b>
-{{ if .PreviewText }}{{.PreviewText}}...{{- end}}
+{{ if .PreviewText }}<b>{{.ContentTitle}}</b>
+
+{{.PreviewText}}...
 {{if .EnableTelegraph}}
 <a href="{{.RawLink}}">查看原文</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
 {{- else }}
 <a href="{{.RawLink}}">查看原文</a>
 {{- end }}
+{{- else }}{{if .EnableTelegraph}}<a href="{{.RawLink}}">{{.ContentTitle}}</a> | <a href="{{.TelegraphURL}}">Telegraph</a>
+{{- else }}<a href="{{.RawLink}}">{{.ContentTitle}}</a>
+{{- end}}
 {{.Tags}}
 `
 	defaultMessageMarkdownTpl = `
-** {{.ContentTitle}} **
-{{ if .PreviewText }}{{.PreviewText}}...{{- end}}
+{{ if .PreviewText }}** {{.ContentTitle}} **
+
+{{.PreviewText}}...
 {{if .EnableTelegraph}}
 [查看原文]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
 {{- else }}
 [查看原文]({{.RawLink}})
 {{- end }}
+{{- else }}{{if .EnableTelegraph}}[** {{.ContentTitle}} **]({{.RawLink}} |  [Telegraph]({{.TelegraphURL}}))
+{{- else }}[** {{.ContentTitle}} **]({{.RawLink}})
+{{- end}}
 {{.Tags}}
 `
 	TestMode    RunType = "Test"
